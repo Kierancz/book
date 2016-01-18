@@ -16,62 +16,72 @@
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
       <div class="container">
-        <h1>Kieran Czerwinski</h1>
+        <h1><i class="large material-icons">perm_identity</i> Kieran Czerwinski</h1>
+        <br>
       </div>
 
       <div class="container">
-        <h2>Objective</h2>
-
-        <h2>Education</h2>
+        <h3>Education </h3>
         <h5>University of Colorado at Boulder </h5>
         <h6>Major: Computer Science </h6>
         <h6>Minor: Philosophy</h6>
         <br>
-
-        <h2>Skills</h2>
-        <ul class="collection" id="skills">
-        </ul>
-
-        <h2>Languages</h2>
-        <ul class="collection" id="languages">
-        </ul>
-
-        <h2>Frameworks</h2>
-        <ul class="collection" id="frameworks">
-        </ul>
       </div>
 
-        <h2>Skills</h2>
-          <script>
-            // create a fidrebase reference to the root
-            var ref = new Firebase('https://dazzling-inferno-3986')
-
-            // read data from the location resume/skills, only once
-            ref.child('resume/skills').once('value', function(snapshot){
-              var skills = snapshot.val()
-              skills.forEach(function(skill){
-
-                $('#skills').append('<div><ul class="collection with-header"><li class="collection-header"><h4>' + skill.name + '</h4></li></ul></div>')
-              })
-            })
-
-            ref.child('resume/languages').once('value', function(snapshot){
-              var languages = snapshot.val()
-              languages.forEach(function(language){
-                $('#languages').append('<div><ul class="collection with-header"><li class="collection-header"><h4>' + language.name + '</h4></li></ul></div>')
-              })
-            })
-
-            ref.child('resume/Frameworks').once('value', function(snapshot){
-              var frameworks = snapshot.val()
-              frameworks.forEach(function(framework){
-                $('#frameworks').append('<div><ul class="collection with-header"><li class="collection-header"><h4>' + framework.name + '</h4></li></ul></div>')
-              })
-            })
-          </script>
-
+      <div class="container">
+        <div class="row">
+          <div class="section col s4">
+            <h3>Skills</h3>
+            <ul class="collection" id="skills">
+            </ul>
+          </div>
+          <div class="section col s4">
+            <h3>Languages</h3>
+            <ul class="collection" id="languages">
+            </ul>
+          </div>
+          <div class="section col s4">
+            <h3>Frameworks</h3>
+            <ul class="collection" id="frameworks">
+            </ul>
+          </div>
+        </div>
       </div>
 
+      <script>
+        // create a firebase reference to the root
+        var ref = new Firebase('https://dazzling-inferno-3986.firebaseio.com/')
 
+        // read data from the location resume/skills, only once
+        ref.child('resume/skills').once('value', function(snapshot){
+          var skills = snapshot.val()
+          skills.forEach(function(skil){
+            $('#skills').append('<li class="collection-item">' + skil + '</li>')
+          })
+        }),
+
+        ref.child('resume/languages').once('value', function(snapshot){
+          var languages = snapshot.val()
+          languages.forEach(function(lang){
+            $('#languages').append('<li class="collection-item">' + lang + '</li>')
+          })
+        }),
+
+        ref.child('resume/frameworks').once('value', function(snapshot){
+          var frameworks = snapshot.val()
+          frameworks.forEach(function(frmwrk){
+            $('#frameworks').append('<li class="collection-item">' + frmwrk + '</li>')
+          })
+        })
+      </script>
     </body>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container">
+        © 2016 Kieran Czerwinski
+        <a class="grey-text text-lighten-4 right"><i class="tiny material-icons">contact_phone</i> (707) 499 - 9913</a>
+        </div>
+      </div>
+    </footer>
   </html>
