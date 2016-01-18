@@ -16,33 +16,62 @@
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
 
       <div class="container">
+        <h1>Kieran Czerwinski</h1>
+      </div>
 
-        <h1>Tom Yeh</h1>
+      <div class="container">
+        <h2>Objective</h2>
 
-        <h2>Favorite Programming Languages</h2>
-        <ul class="collection">
-          <li class="collection-item">Javascript</li>
-          <li class="collection-item">Haskell</li>
+        <h2>Education</h2>
+        <h5>University of Colorado at Boulder </h5>
+        <h6>Major: Computer Science </h6>
+        <h6>Minor: Philosophy</h6>
+        <br>
+
+        <h2>Skills</h2>
+        <ul class="collection" id="skills">
         </ul>
 
-        <h2>Favorite Food</h2>
-        <ul class="collection" id="foods">
+        <h2>Languages</h2>
+        <ul class="collection" id="languages">
         </ul>
+
+        <h2>Frameworks</h2>
+        <ul class="collection" id="frameworks">
+        </ul>
+      </div>
+
+        <h2>Skills</h2>
+          <script>
+            // create a fidrebase reference to the root
+            var ref = new Firebase('https://dazzling-inferno-3986')
+
+            // read data from the location resume/skills, only once
+            ref.child('resume/skills').once('value', function(snapshot){
+              var skills = snapshot.val()
+              skills.forEach(function(skill){
+
+                $('#skills').append('<div><ul class="collection with-header"><li class="collection-header"><h4>' + skill.name + '</h4></li></ul></div>')
+              })
+            })
+
+            ref.child('resume/languages').once('value', function(snapshot){
+              var languages = snapshot.val()
+              languages.forEach(function(language){
+                $('#languages').append('<div><ul class="collection with-header"><li class="collection-header"><h4>' + language.name + '</h4></li></ul></div>')
+              })
+            })
+
+            ref.child('resume/Frameworks').once('value', function(snapshot){
+              var frameworks = snapshot.val()
+              frameworks.forEach(function(framework){
+                $('#frameworks').append('<div><ul class="collection with-header"><li class="collection-header"><h4>' + framework.name + '</h4></li></ul></div>')
+              })
+            })
+          </script>
 
       </div>
 
-      <script>
 
-        // create a firebase reference to the root
-        var ref = new Firebase('https://hello-ucdd2.firebaseio.com/')
-
-        // read data from the location bio/favorite_foods, only once
-        ref.child('bio/favorite_foods').once('value', function(snapshot){
-          var foods = snapshot.val()
-          foods.forEach(function(food){
-            $('#foods').append('<li class="collection-item">' + food + '</li>')
-          })
-        })
-      </script>
     </body>
   </html>
