@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+ <html>
+   <head>
+     <!--Import Google Icon Font-->
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+     <!--Import materialize.css-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+
+     <!--Let browser know website is optimized for mobile-->
+     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   </head>
+
+   <body>
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+
+      <nav>
+        <div class="nav-wrapper teal lighten-2">
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="high.html">High</a></li>
+            <li><a href="medium.html">Medium</a></li>
+            <li><a href="low.html">Low</a></li>
+            <li><a href="completed.html">Completed</a></li>
+            <li><a href="inbox.html">Inbox</a></li>
+          </ul>
+        </div>
+      </nav>     
+
+     <div class="container">
+
+       <h1> Adding a Task </h1>
+
+       <div class="row">
+         <div class="input-field col s12">
+           <i class="material-icons prefix">mode_edit</i>
+           <input value="" id="name" type="text" class="validate">
+           <label for="title">Title</label>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="input-field col s12">
+           <select id="priority">
+             <option value="" disabled selected>Choose Priority</option>
+             <option value="high">High</option>
+             <option value="medium">Medium</option>
+             <option value="low">Low</option>
+           </select>
+         </div>
+       </div>
+
+       <div  class="row">
+         <div class="input-field col s12">
+           <i class="material-icons prefix">label_outline</i>
+           <label>Task Type</label>
+           <input type="text" id="type"/>
+         </div>
+       </div>
+
+       <div  class="row">
+         <div class="input-field col s12">
+           <i class="material-icons prefix">assignment_ind</i>
+           <label>Assigned User ID</label>
+           <input type="text" id="assigned"/>
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="input-field col s12">
+           <i class="material-icons prefix">today</i>
+           <label>Due Date</label>
+           <input type="date" class="datepicker" id="date">
+         </div>
+       </div>
+
+       <div class="row">
+         <div class="input-field col s12">
+           <a class="waves-effect waves-light btn" id="submit">Submit</a>
+         </div>
+       </div>
+     </div>
+
+      <script>
+
+        var root = new Firebase('https://killinit-base.firebaseio.com/')
+        var taskListRef = root.child('todos/tasks')
+
+        $('#submit').click(function(){
+          console.log('the submit button is clicked')
+
+          var name = $('#name').val()
+          console.log('the title is', name)
+
+          var priority = $('#priority').val()
+          console.log('the priority is', priority)
+
+          var type = $('#type').val();
+            console.log('the type is', type)
+          var date = $('#date').val();
+            console.log('the date is', date)
+          var assigned = $('#assigned').val();
+            console.log('assigned to', assigned)
+
+          var taskObject = {
+              deadline: date,
+              priority: priority,
+              name: name,
+              type: type,
+              assigned: assigned
+            };
+
+            //null or empty string
+            if (date!= null && name != null) {
+              taskListRef.push().set(taskObject);
+            }
+        })
+        // IMPORTANT!! initialize materializecss select
+        $(document).ready(function() {
+          $('select').material_select();
+          $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15 // Creates a dropdown of 15 years to control year
+          });
+        });
+      </script>
+    </body>
+  </html>
