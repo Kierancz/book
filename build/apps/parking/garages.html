@@ -18,9 +18,18 @@
       
       <nav>
         <div class="nav-wrapper teal lighten-2">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-          </ul>
+          <div class="container">
+            <a href="index.html" class="brand-logo">SF Garage Space</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+            </ul>
+          </div>
         </div>
       </nav>
 
@@ -38,65 +47,81 @@
       var ref = new Firebase('https://publicdata-parking.firebaseio.com');
 
       var data
+      var active_index
 
       // read data from the location san_francisco/garages, only once
-      ref.child('san_francisco/garages').once('value', function(snapshot){
-        data = snapshot.val()
-        console.log('data is loaded', data)
+      ref.child('san_francisco/garages').on('value', function(snapshot){      
+        data = snapshot.val();
+        $("#garages").empty();
 
         // filter the data
         var garages = _.filter(data, function(d){
             // keep only those values (d) that has "open_spaces" as a field
             return _.has(d, 'open_spaces')
         })
-
         displayGarages(garages)
       })
 
       function displayGarages(garages){
         // lodash _.forEach https://lodash.com/docs#forEach
         _.forEach(garages, function(val, key){
-          if(val['hours'].length){
-            var textInsert = [];
-            var i = 0;
-            var length = val['hours'].length;
-            textInsert[i++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'];
-            for (var a = 0; a < length; a += 1) {
-              textInsert[i++] = '<br><b>Hours: </b>';
-              if(val['hours'][a]['BEG'] != null){
-                textInsert[i++] = val['hours'][a]['BEG'];}
-              if(val['hours'][a]['END'] != null){
-                textInsert[i++] = ' to ';
-                textInsert[i++] = val['hours'][a]['END'];}
-              if(val['hours'][a]['FROM'] != null){
-                textInsert[i++] = ', <b>Days:</b> ';
-                textInsert[i++] = val['hours'][a]['FROM'];}
-              if(val['hours'][a]['TO'] != null){
-                textInsert[i++] = ' to ';
-                textInsert[i++] = val['hours'][a]['TO'];}
+          var txt_insert = [];
+          var i = 0;
+          var hours = val['hours'];
+          var hrs_length = hours.length;
+          var rates = val['rates'];
+          var rate_length = rates.length;
+          var open = val['open_spaces'];
+
+          active_index = txt_insert.indexOf("active");
+          if (active_index) {
+            txt_insert[active_index] = '<li class="collection-item active"><div class="collapsible-header active">';}
+          else {
+            txt_insert[i++] = '<li class="collection-item"><div class="collapsible-header">';}
+      
+          /*
+          if (parseInt(open) < 100){
+            txt_insert[i++] =  '<div class="collapsible-header red lighten-2 white-text">';}
+          else if (parseInt(open) >= 100 && parseInt(open) < 300){
+            txt_insert[i++] =  '<div class="collapsible-header blue lighten-2 white-text">';}
+          else {
+            txt_insert[i++] =  '<div class="collapsible-header green lighten-2 white-text">';}
+            */
+          txt_insert[i++] = val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + open + '/' + val['total_spaces'] + '<br><i class="tiny material-icons">schedule</i><b> Hours: </b>';
+
+
+
+          if(hrs_length){
+            for (var a = 0; a < hrs_length; a += 1) {
+              txt_insert[i++] = '<br>';
+              if(hours[a]['FROM']) txt_insert[i++] = hours[a]['FROM'];
+              if(hours[a]['TO']) txt_insert[i++] = ' to ' + hours[a]['TO'];
+              if(hours[a]['BEG']) txt_insert[i++] = ', ' + hours[a]['BEG'];
+              if(hours[a]['END']) txt_insert[i++] = ' to ' + hours[a]['END'];
             }
-            textInsert[i++] = '</p></div></li>';
-            $('#garages').append(textInsert.join(''));
           }
           else{
-            var textInsert2 = [];
-            var j = 0;
-            textInsert2[j++] = '<li class="collection-item"><div class="collapsible-header">' + val['friendlyName'] + '</div><div class="collapsible-body"><p class"flow-text"><b>Open Spaces: </b> ' + val['open_spaces'] + '/' + val['total_spaces'];
-            textInsert2[j++] = '<br><b>Hours: </b>';
-            if(val['hours']['BEG'] != null){
-              textInsert2[j++] = val['hours']['BEG'];}
-            if(val['hours']['END'] != null){
-              textInsert2[j++] = ' to ';
-              textInsert2[j++] = val['hours']['END'];}
-            if(val['hours']['FROM'] != null){
-              textInsert2[j++] = ', <b>Days:</b> ';
-              textInsert2[j++] = val['hours']['FROM'];}
-            if(val['hours']['TO'] != null){
-              textInsert2[j++] = ' to ';
-              textInsert2[j++] = val['hours']['TO'];}
-            textInsert2[j++] = '</p></div></li>';
-            $('#garages').append(textInsert2.join(''));
+              txt_insert[i++] = '<br>';
+              if(hours['FROM']) txt_insert[i++] = hours['FROM'];
+              if(hours['TO']) txt_insert[i++] = ' to ' + hours['TO'];
+              if(hours['BEG']) txt_insert[i++] = ', ' + hours['BEG'];
+              if(hours['END']) txt_insert[i++] = ' to ' + hours['END'];
           }
+
+          if(rate_length){
+            txt_insert[i++] = '<br><i class="tiny material-icons">payment</i><b> Rates: </b>';
+            for (var a2 = 0; a2 < rate_length; a2 += 1) {
+              txt_insert[i++] = '<br>';
+              if(rates[a2]['BEG']) txt_insert[i++] = rates[a2]['BEG'];
+              if(rates[a2]['END']) txt_insert[i++] = ' to ' + rates[a2]['END'];
+              if(rates[a2]['DESC']) txt_insert[i++] = rates[a2]['DESC'];
+              if(rates[a2]['RATE']) txt_insert[i++] = ',  $' + rates[a2]['RATE'];
+              if(rates[a2]['RQ']) txt_insert[i++] = ',   ' + rates[a2]['RQ'];
+              if(rates[a2]['RR']) txt_insert[i++] = ',  ' + rates[a2]['RR'];
+            }
+          }
+          txt_insert[i++] = '</p></div></li> ';
+          $('#garages').append(txt_insert.join(''));
         })
       }
       </script>
