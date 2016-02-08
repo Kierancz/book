@@ -73,20 +73,22 @@
           var rate_length = rates.length;
           var open = val['open_spaces'];
 
+          /*
           active_index = txt_insert.indexOf("active");
           if (active_index) {
             txt_insert[active_index] = '<li class="collection-item active"><div class="collapsible-header active">';}
           else {
             txt_insert[i++] = '<li class="collection-item"><div class="collapsible-header">';}
+            */
       
-          /*
+          
           if (parseInt(open) < 100){
             txt_insert[i++] =  '<div class="collapsible-header red lighten-2 white-text">';}
           else if (parseInt(open) >= 100 && parseInt(open) < 300){
             txt_insert[i++] =  '<div class="collapsible-header blue lighten-2 white-text">';}
           else {
             txt_insert[i++] =  '<div class="collapsible-header green lighten-2 white-text">';}
-            */
+    
           txt_insert[i++] = val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + open + '/' + val['total_spaces'] + '<br><i class="tiny material-icons">schedule</i><b> Hours: </b>';
 
 

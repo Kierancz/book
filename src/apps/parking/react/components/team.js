@@ -8,26 +8,35 @@ MyComponents.Team = React.createClass({
     // information about this member.
 
     var members = this.props.members.map(function(member, i){
-      return <li key={i} className="collection-item">
-              <span className="chip blue">{member.name}</span>
-              <a className="white" href={'http://something'}>Github</a>
-            </li>
+    
+    for (var key in member){
+      var name = key;
+      var major = member[key].major;
+      var place = member[key].place;
+    var img = member[key].img;
+    var ref = member[key].ref;
+      return <div className="col-md-4">
+      <p className="text-center" style={{"margin-top":"40px"}}><strong>{name}</strong></p><br/>
+      <a data-toggle="collapse" data-target=".demo">
+      <img src={img} className="img-circle person" alt="Random Name" style={{"height" : "255px", "width" : "330px"}}/>
+      </a>
+      <p>{major}</p>
+      <p>{place}</p>
+      <a href={ref} alt="Resume">Check me out!</a>
+      </div>
+
+    }
     })
 
     return (
-      <div className="card">
-
-        <div className="card-content">
-          <div>
-            TODO: This is a component to display the info about our team
-            raw props data is {JSON.stringify(this.props)}
-          </div>
-          <span className="card-title">Team Members</span>
-          <div className="collection">
-            {members}
-          </div>
+        <div className="contains" id="band">
+          <div className="row text-center">
+        <div className="col-md-12">
+           <h1>THE CREW</h1>
         </div>
+        {members}
       </div>
+        </div>
     );
   }
 });
