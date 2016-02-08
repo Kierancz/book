@@ -1,13 +1,17 @@
 <!DOCTYPE html>
   <html>
     <head>
+      <title>Garage List</title>
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-
       <!--Let browser know website is optimized for mobile-->
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <!--Import stylesheet for twitter bootstrap-->
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <!--Import stylesheet for Leaflet to work-->
+      <link rel="stylesheet" href="css/leaflet.css"/>
     </head>
 
     <body>
@@ -15,7 +19,9 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
       <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.0.0/lodash.min.js"></script>
-      
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	  <script src="js/leaflet.js"/></script>
+    
       <nav>
         <div class="nav-wrapper teal lighten-2">
           <div class="container">
@@ -23,109 +29,27 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
               <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
-              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">map</i>Map</a></li>
+              <li><a href="profiles.html"><i class="small material-icons">perm_identity</i>Crew</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
               <li><a href="garages.html"><i class="small material-icons">list</i>List</a></li>
-              <li><a href="garages_map.html"><i class="small material-icons">navigation</i>Map</a></li>
+              <li><a href="garages_map.html"><i class="small material-icons">map</i>Map</a></li>
+              <li><a href="profiles.html"><i class="small material-icons">perm_identity</i>Crew</a></li>
             </ul>
           </div>
         </div>
       </nav>
 
-      <div class="container">
+      <div class="row">
+        <div class="s10 offset-s1 col">
 
         <h1>Garages</h1>
-        <ul class="collapsible popout" data-collapsible="accordion" id="garages">
+        <ul class="collection" id="garages">
         </ul>
-
+        </div>
       </div>
 
-      <script>
-
-      // create a firebase reference to the root
-      var ref = new Firebase('https://publicdata-parking.firebaseio.com');
-
-      var data
-      var active_index
-
-      // read data from the location san_francisco/garages, only once
-      ref.child('san_francisco/garages').on('value', function(snapshot){      
-        data = snapshot.val();
-        $("#garages").empty();
-
-        // filter the data
-        var garages = _.filter(data, function(d){
-            // keep only those values (d) that has "open_spaces" as a field
-            return _.has(d, 'open_spaces')
-        })
-        displayGarages(garages)
-      })
-
-      function displayGarages(garages){
-        // lodash _.forEach https://lodash.com/docs#forEach
-        _.forEach(garages, function(val, key){
-          var txt_insert = [];
-          var i = 0;
-          var hours = val['hours'];
-          var hrs_length = hours.length;
-          var rates = val['rates'];
-          var rate_length = rates.length;
-          var open = val['open_spaces'];
-
-          /*
-          active_index = txt_insert.indexOf("active");
-          if (active_index) {
-            txt_insert[active_index] = '<li class="collection-item active"><div class="collapsible-header active">';}
-          else {
-            txt_insert[i++] = '<li class="collection-item"><div class="collapsible-header">';}
-            */
-      
-          
-          if (parseInt(open) < 100){
-            txt_insert[i++] =  '<div class="collapsible-header red lighten-2 white-text">';}
-          else if (parseInt(open) >= 100 && parseInt(open) < 300){
-            txt_insert[i++] =  '<div class="collapsible-header blue lighten-2 white-text">';}
-          else {
-            txt_insert[i++] =  '<div class="collapsible-header green lighten-2 white-text">';}
-    
-          txt_insert[i++] = val['friendlyName'] + '</div><div class="collapsible-body"><p><b>Open Spaces: </b> ' + open + '/' + val['total_spaces'] + '<br><i class="tiny material-icons">schedule</i><b> Hours: </b>';
-
-
-
-          if(hrs_length){
-            for (var a = 0; a < hrs_length; a += 1) {
-              txt_insert[i++] = '<br>';
-              if(hours[a]['FROM']) txt_insert[i++] = hours[a]['FROM'];
-              if(hours[a]['TO']) txt_insert[i++] = ' to ' + hours[a]['TO'];
-              if(hours[a]['BEG']) txt_insert[i++] = ', ' + hours[a]['BEG'];
-              if(hours[a]['END']) txt_insert[i++] = ' to ' + hours[a]['END'];
-            }
-          }
-          else{
-              txt_insert[i++] = '<br>';
-              if(hours['FROM']) txt_insert[i++] = hours['FROM'];
-              if(hours['TO']) txt_insert[i++] = ' to ' + hours['TO'];
-              if(hours['BEG']) txt_insert[i++] = ', ' + hours['BEG'];
-              if(hours['END']) txt_insert[i++] = ' to ' + hours['END'];
-          }
-
-          if(rate_length){
-            txt_insert[i++] = '<br><i class="tiny material-icons">payment</i><b> Rates: </b>';
-            for (var a2 = 0; a2 < rate_length; a2 += 1) {
-              txt_insert[i++] = '<br>';
-              if(rates[a2]['BEG']) txt_insert[i++] = rates[a2]['BEG'];
-              if(rates[a2]['END']) txt_insert[i++] = ' to ' + rates[a2]['END'];
-              if(rates[a2]['DESC']) txt_insert[i++] = rates[a2]['DESC'];
-              if(rates[a2]['RATE']) txt_insert[i++] = ',  $' + rates[a2]['RATE'];
-              if(rates[a2]['RQ']) txt_insert[i++] = ',   ' + rates[a2]['RQ'];
-              if(rates[a2]['RR']) txt_insert[i++] = ',  ' + rates[a2]['RR'];
-            }
-          }
-          txt_insert[i++] = '</p></div></li> ';
-          $('#garages').append(txt_insert.join(''));
-        })
-      }
-      </script>
+      <script src="js/list.js"></script>
     </body>
   </html>

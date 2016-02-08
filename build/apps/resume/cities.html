@@ -40,10 +40,10 @@
       </nav>
 
       <div class="container">
-        <h1 class="center">My Favoirte Cities</h1>
-          <div class="row">
-            <div id="cities" class="collapsible popout" data-collapsible="accordion"></div>
-          </div>
+        <h1 class="center">My Favorite Cities</h1>
+          <ul class="collection">
+            <div id="cities"></div>
+          </ul>
         <div id="map" style="height:500px"></div>
       </div>
 
@@ -52,21 +52,18 @@
 // create a firebase reference to the root
 var weatherRef = new Firebase('https://publicdata-weather.firebaseio.com/');
 
-var data
-
 // read data from only once
 weatherRef.on('value', function(snapshot){
-  var city = snapshot.val()
-  mapCity(city.denver)
-  mapCity(city.seattle)
-  mapCity(city.sanfrancisco)
-  mapCity(city.portland)
-  mapCity(city.boston)
-  displayCity(city.denver, 'Denver')
-  displayCity(city.seattle, 'Seattle')
-  displayCity(city.sanfrancisco, 'San Francisco')
-  displayCity(city.portland, 'Portland')
-  displayCity(city.boston, 'Boston')
+  var cities = snapshot.val()
+  // Clear the layers
+  markersLayerGroup.clearLayers()
+  $('#cities').empty()
+  var fav_cities = [denver, seattle, sanfrancisco, portland, boston];
+  for (var i in fav_cities) {
+    var city = fav_cities[i];
+    mapCity(cities[city], city);
+    displayCity(cities[city], city);
+  }
 })
 
 var attributionText = 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a       href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>'
@@ -86,38 +83,24 @@ var markersLayerGroup = L.layerGroup()
 markersLayerGroup.addTo(map)
 
 // visualize cities on the map
-function mapCity(city){
+function mapCity(city, name){
   console.log('mapCity', city)
   var latlng = [city.latitude, city.longitude]
-  var circle;
-  if (parseInt(city.currently.temperature) < 40){
-    circle = L.circle(latlng, 20, {
-      color: 'blue',
-      fillColor: '#f03',
-      fillOpacity: 0.5
-    })
-  } 
-  else if (parseInt(city.currently.temperature) >= 40 && parseInt(city.currently.temperature) < 55){
-    circle = L.circle(latlng, 20, {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5
-    })
-  }
-  else {
-    circle = L.circle(latlng, 20, {
-      color: 'red',
-      fillColor: '#f03',
-      fillOpacity: 0.5
-    })
-  }
-  
-  markersLayerGroup.addLayer(circle)
+  var WeatherIcon = L.Icon.extend({
+      options: {
+          iconUrl: "images/" + city.currently.icon + ".png",
+          iconSize: [50, 50],
+          shadowSize: [0,0]
+      }
+  })
+  var weatherIcon = new WeatherIcon();
+  L.marker(latlng, {icon: weatherIcon}).bindLabel(name.toUpperCase() + "<br>Conditions: " + city.currently.summary + "<br>Temperature: " + city.currently.temperature ).addTo(map);
+  L.marker(latlng).addTo(map);
 }
 
 function displayCity(city, name){
   console.log('displayCity', city)
-  $('#cities').append('<li class="collection-item" style="list-style-type: none; padding: 10px;">' + '<b style="font-size: 18px; color: green;">' + name + '</b><br>' +
+  $('#cities').append('<li class="collection-item" style="list-style-type: none; padding: 10px;"><b style="font-size: 18px; color: green;">' + name + '</b><br>' +
       "<b>Apparent Temp:</b> " + city.currently.apparentTemperature + ' degrees<br>' + 
     "<b>Temperature:</b> " + city.currently.temperature + ' degrees<br>' + 
     "<b>Humidity:</b> " + city.currently.humidity + '<br>' + 
