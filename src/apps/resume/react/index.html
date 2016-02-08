@@ -17,18 +17,40 @@
   <body>
     <div id="navbar"></div>
     <div class="container">
-      <h2 id="about-heading"><i class="medium material-icons">info</i>About Me</h2>
+      <h3 id="about-heading"><i class="small material-icons">info</i> About Me</h3>
       <div id="about"></div>
 
-      <h2 id="skills-heading">Skills</h2>
-      <div id="skills"></div>
+      <div class="row">
+        <div class="col l4 s12">
+          <h3 id="skills-heading"><i class="small material-icons">build</i> Skills</h3>
+          <div id="skills"></div>
+        </div>
 
-      <h2 id="tasks-heading">Tasks</h2>
+        <div class="col l4 s12">
+          <h3 id="languages-heading"><i class="small material-icons">language</i> Languages</h3>
+          <div id="languages"></div>
+        </div>
+
+        <div class="col l4 s12">
+          <h3 id="frameworks-heading"><i class="small material-icons">code</i> Frameworks</h3>
+          <div id="frameworks"></div>
+        </div>
+      </div>
+
+      <h3 id="tasks-heading">Tasks</h3>
       <div id="tasks"></div>
 
-      <h2 id="cities-heading">Favorite Cities</h2>
+      <h3 id="cities-heading">Favorite Cities</h3>
       <div id="cities"></div>
     </div>
+
+    <footer class="page-footer">
+      <div class="footer-copyright">
+        <div class="container"><i>
+        © 2016 Cybaura LLC. All rights reserved.</i>
+        </div>
+      </div>
+    </footer>
     <script>
       // MyComponents is a global object where each property is a reference to a component class
       MyComponents = {}
@@ -39,7 +61,10 @@
     <script type="text/babel" src="components/navbar.js"></script>
     <script type="text/babel" src="components/about.js"></script>
     <script type="text/babel" src="components/skill-list.js"></script>
+    <script type="text/babel" src="components/language-list.js"></script>
+    <script type="text/babel" src="components/framework-list.js"></script>
     <script type="text/babel" src="components/city-list.js"></script>
+    <script type="text/babel" src="components/task-list.js"></script>
 
     <!-- render react components -->
     <script type="text/babel">
@@ -49,8 +74,10 @@
         $('#navbar').get(0)
       );
 
+      var about = {name:'Kieran Czerwinski', photo:'img/kieran.jpg', school:'University of Colorado Boulder', major:'Computer Science', minor:'Philosophy', birth:'Arcata, CA', github:'https://github.com/Kierancz'}
+
       ReactDOM.render(
-        <MyComponents.About/>,
+        <MyComponents.About about={about}/>,
         $('#about').get(0)
       );
 
@@ -80,6 +107,32 @@
         ReactDOM.render(
           <MyComponents.SkillList skills={skills}/>,
           $('#skills').get(0)
+        );
+      })
+
+      my_info.child('resume/languages').on('value', function(snapshot){
+        var languages = snapshot.val()
+        ReactDOM.render(
+          <MyComponents.LanguageList languages={languages}/>,
+          $('#languages').get(0)
+        );
+      })
+
+      my_info.child('resume/frameworks').on('value', function(snapshot){
+        var frameworks = snapshot.val()
+        ReactDOM.render(
+          <MyComponents.FrameworkList frameworks={frameworks}/>,
+          $('#frameworks').get(0)
+        );
+      })
+
+      //load tasks data from Firebase
+      var team_ref = new Firebase('https://killinit-base.firebaseio.com')
+      team_ref.child('todos/tasks').on('value', function(snapshot){
+        var tasks = snapshot.val()
+        ReactDOM.render(
+          <MyComponents.TaskList tasks={tasks}/>,
+          $('#tasks').get(0)
         );
       })
 

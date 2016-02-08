@@ -6,9 +6,9 @@ MyComponents.Task = React.createClass({
         <i className="material-icons">label_outline</i><b> {this.props.task.name} </b>
           <p>
           <br>Priority: {this.props.task.priority} </br>
-          Deadline: {this.props.task.deadline} </br>
-          Type: {this.props.task.type} </br>
-          Assigned: {this.props.task.assigned} </br>
+          <br>Deadline: {this.props.task.deadline} </br>
+          <br>Type: {this.props.task.type} </br>
+          <br>Assigned: {this.props.task.assigned} </br>
           </p>
       </li>
     );

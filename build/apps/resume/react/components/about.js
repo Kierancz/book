@@ -3,13 +3,23 @@ MyComponents.About = React.createClass({
   render: function() {
     return (
       <div className="card">
+        <div className="card-image">
+          <img className="activator" src={this.props.about.photo}></img>
+          <span className="card-title">{this.props.about.name}</span>
+        </div>
+
         <div className="card-content">
-          <p>Hello there! My name is Kieran. I grew up in rural northern California, surrounded by Redwoods. I love building stuff, from the voice controlled smart motorhome that I live in, to wearable power and computing modules and electric bikes. Check out my projects in the navbar above!
+          <div className="chip">
+            <img src={"img/kieran.jpg"}/>
+            <a href={this.props.about.github}>My Github</a>
+          </div>
+          <p>
+            <b>Name: </b>{this.props.about.name}<br></br>
+            <b>Education: </b>{this.props.about.school}<br></br>
+            <b>Major: </b>{this.props.about.major}<br></br>
+            <b>Major: </b>{this.props.about.minor}<br></br>
+            <b>Birth Place: </b>{this.props.about.birth}
           </p>
-          <h2><i className="medium material-icons">school</i> Education </h2>
-          <h5>University of Colorado at Boulder </h5>
-          <h6>Major: Computer Science </h6>
-          <h6>Minor: Philosophy</h6>
         </div>
       </div>
     );
