@@ -126,15 +126,19 @@
         );
       })
 
-      //load tasks data from Firebase
-      var team_ref = new Firebase('https://killinit-base.firebaseio.com')
-      team_ref.child('todos/tasks').on('value', function(snapshot){
-        var tasks = snapshot.val()
+      // TODO: load tasks data from Firebase
+      var ref = new Firebase('https://killinit-base.firebaseio.com')
+      ref.child('todos').child('tasks').on('value', function(snapshot){
+        var unformatted_tasks = snapshot.val()
+        var tasks = []
+        for(var task in unformatted_tasks) {
+          tasks.push(unformatted_tasks[task])
+        }
         ReactDOM.render(
           <MyComponents.TaskList tasks={tasks}/>,
           $('#tasks').get(0)
         );
-      })
+      });
 
     </script>
   </body>

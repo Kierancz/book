@@ -14,6 +14,7 @@ MyComponents.About = React.createClass({
             <a href={this.props.about.github}>My Github</a>
           </div>
           <p>
+            <br></br>
             <b>Name: </b>{this.props.about.name}<br></br>
             <b>Education: </b>{this.props.about.school}<br></br>
             <b>Major: </b>{this.props.about.major}<br></br>
