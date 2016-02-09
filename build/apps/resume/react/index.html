@@ -13,6 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script src='https://cdn.firebase.com/js/client/2.2.1/firebase.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
   </head>
   <body>
     <div id="navbar"></div>
@@ -37,11 +38,22 @@
         </div>
       </div>
 
-      <h3 id="tasks-heading">Tasks</h3>
+      <h3 id="tasks-heading"><i class="small material-icons">assignment</i> Tasks</h3>
       <div id="tasks"></div>
 
-      <h3 id="cities-heading">Favorite Cities</h3>
+      <h3 id="cities-heading"><i class="small material-icons">business</i> Favorite Cities</h3>
       <div id="cities"></div>
+    </div>
+
+    <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+      <a class="btn-floating btn-large blue">
+        <i class="large material-icons">more_vert</i>
+      </a>
+      <ul>
+        <li><a class="btn-floating blue darken-1" href="#cities-heading"><i class="material-icons">business</i></a></li>
+        <li><a class="btn-floating green;back-to-top" href="#"><i class="material-icons">publish</i></a></li>
+        <li><a class="btn-floating red" href="index.html"><i class="material-icons">replay</i></a></li>
+      </ul>
     </div>
 
     <footer class="page-footer">
@@ -68,6 +80,18 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      $(document).ready(function(){
+        $('.collapsible').collapsible({
+          accordion : false // A setting that changes the collapsible behavior to expandable instead of the default accordion style
+        });
+      });
+      $(document ).ready(function(){
+          $(".sbutton-collapse").sideNav();
+      });
+    </script>
+
     <script>
       // MyComponents is a global object where each property is a reference to a component class
       MyComponents = {}

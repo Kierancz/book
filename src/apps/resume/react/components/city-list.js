@@ -3,9 +3,9 @@ MyComponents.City = React.createClass({
   render: function() {
     this.props.city.currently.icon = "img/" + this.props.city.currently.icon + ".png"
     return (
-      <li className="collection-item">
+      <li className="collection-item avatar">
+        <img src={this.props.city.currently.icon} alt="" className="circle"></img>
         <span className="title">{this.props.city.name.toUpperCase()}</span>
-        <img src={this.props.city.currently.icon} className="right-align"></img>
         <p><b>Temperature:</b> {this.props.city.currently.temperature} F</p>
         <p><b>Conditions:</b> {this.props.city.currently.summary}</p>
         <p><b>Humidity:</b> {this.props.city.currently.humidity}%</p>
