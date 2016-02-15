@@ -45,18 +45,68 @@
         <li class="bold"><a href="newCollection.html"><i class="material-icons">library_add</i> New Collection</a></li>
         <li class="bold"><a href="about.html"><i class="material-icons">info</i> About</a></li>
       </ul>
-
-      <div class="container">
-        <h1>Welcome to Collectr!</h1>
-        <h4>Collect your favorite videos, music, and photos in a collaborative space, that you can share with your friends, or save for your own convienience and enjoyment!</h4>
-      </div>
-
       <script>
         // Initialize collapse button
         $(".button-collapse").sideNav();
         // Initialize collapsible (uncomment the line below if you use the dropdown variation)
         $('.collapsible').collapsible();
       </script>
+
+      <div class="container">
+        <h1>Create a New Collection</h1>
+      </div>
+      <hr><br>
+      <div class="container">
+        <div class="row">
+          <form class="col s12">
+          <div class="col m6 s12">
+            <div class="row">
+              <div class="input-field">
+                <input id="input_text" type="text" length="40">
+                <label for="input_text">Title</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+                <input id="input_text2" type="text" length="
+                100">
+                <label for="input-text2">Description</label>
+              </div>
+            </div>
+          </div>
+          <div class="col m6 s12">
+            <div class="row">
+              <div class="input-field">
+                <input id="input_text3" type="text" length="
+                100">
+                <label for="input-text3">Collaborators (email/usernames separate by commas)</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field">
+              <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
+              <label for="filled-in-box">Private (only you and collaborators can view)</label>
+            </div>
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>Image File</span>
+                <input type="file" multiple>
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text" placeholder="Upload an image for this collection">
+              </div>
+            </div>
+          </div>
+            <br><br>
+            <div class="row">
+              <button class="btn waves-effect waves-light" type="submit" name="action">Create Collection
+                <i class="material-icons right">launch</i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
     </body>
 
     <footer class="page-footer">

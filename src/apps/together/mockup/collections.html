@@ -45,18 +45,56 @@
         <li class="bold"><a href="newCollection.html"><i class="material-icons">library_add</i> New Collection</a></li>
         <li class="bold"><a href="about.html"><i class="material-icons">info</i> About</a></li>
       </ul>
-
-      <div class="container">
-        <h1>Welcome to Collectr!</h1>
-        <h4>Collect your favorite videos, music, and photos in a collaborative space, that you can share with your friends, or save for your own convienience and enjoyment!</h4>
-      </div>
-
       <script>
         // Initialize collapse button
         $(".button-collapse").sideNav();
         // Initialize collapsible (uncomment the line below if you use the dropdown variation)
         $('.collapsible').collapsible();
       </script>
+
+      <div class="container">
+        <h1>Collections: </h1>
+      </div>
+      <hr><br>
+      <div class="container">
+        <div class="input-field col s12">
+          <select>
+            <option value="" disabled selected><i class="material-icons">sort</i>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+          </select>
+          <label>Materialize Select</label>
+        </div>
+
+         <ul class="collection">
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">view_module</i>
+            <a href="collection1.html" class="title">Trippy Music Vids</a>
+            <p>An assortment of awesome music with psychedelic music videos.</p>
+            <a href="#!" class="secondary-content"><span class="badge">12 items</span><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">view_module</i>
+            <a href="collection1.html" class="title">Yoga Workouts</a>
+            <p>Videos of intense guided yoga sessions under 30mins. 
+            </p>
+            <a href="#!" class="secondary-content"><span class="badge">5 items</span><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">view_module</i>
+            <a href="collection1.html" class="title">Jizzy Jazz</a>
+            <p>Awesome selection of electronic influenced jazz music. 
+            </p>
+            <a href="#!" class="secondary-content"><span class="badge">7 items</span><i class="material-icons">grade</i></a>
+          </li>
+          <li class="collection-item avatar">
+            <i class="material-icons circle red">view_module</i>
+            <a href="collection1.html" class="title">42nd Street Shenanigans</a>
+            <a href="#!" class="secondary-content"><span class="badge">4 items</span><i class="material-icons">grade</i></a>
+          </li>
+        </ul>
+      </div>
     </body>
 
     <footer class="page-footer">
@@ -65,7 +103,7 @@
           <div class="col l6 s12">
             <h5 class="white-text">Mailing List</h5>
             <a href="/apps/resume/subscribe.html" class="waves-effect waves-light btn"><i class="tiny material-icons">email</i> Subscribe</a>
-            <p class="grey-text text-lighten-4">Join our mailing list for updates on new features and interesting lists.</p>
+            <p class="grey-text text-lighten-4">Join our mailing list for updates on new features and interesting collections.</p>
           </div>
           <div class="col l4 offset-l2 s12">
             <h5 class="white-text">Contact Info</h5>

@@ -1,7 +1,7 @@
 {
   "resume" : {
     "skills" : [ "Human-Centered Design", "Physical Computing", "Software Engineering", "Web Development", "Graphic Design", "Rapid Prototyping", "Embeded Systems", "3D Modeling", "Photography"],
-    "languages" : [ "C", "C++", "Ruby", "Python", "Java", "javascript", "Scala" ],
-    "frameworks" : [ "Rails", "OpenGL", "Django", "Meteor.js", "Node.js", "PHP", "HTML5", "CSS"]
+    "languages" : [ "C", "C++", "Ruby", "Python", "Java", "JavaScript", "Scala" ],
+    "frameworks" : [ "Rails", "OpenGL", "Django", "Meteor.js", "Node.js", "React.js", "PHP", "HTML5", "CSS"]
   }
 }
