@@ -30,11 +30,12 @@
         <li class="no-padding">
           <ul class="collapsible collapsible-accordion">
             <li>
-              <a class="collapsible-header"><i class="material-icons">person</i> Account<i class="mdi-navigation-arrow-drop-down right"></i></a>
+              <a class="collapsible-header"><i class="material-icons">account_circle</i> Account<i class="mdi-navigation-arrow-drop-down right"></i></a>
               <div class="collapsible-body">
                 <ul>
                   <li><a href="profile.html"><i class="material-icons">face</i> Profile</a></li>
                   <li><a href="accountSettings.html"><i class="material-icons">settings</i> Settings</a></li>
+                  <li><a href="profile.html"><i class="material-icons">people</i> Admin</a></li>
                   <li><a href="logout.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
                 </ul>
               </div>
@@ -50,6 +51,9 @@
         $(".button-collapse").sideNav();
         // Initialize collapsible (uncomment the line below if you use the dropdown variation)
         $('.collapsible').collapsible();
+        $(document).ready(function() {
+          $('select').material_select();
+        });
       </script>
 
       <div class="container">
@@ -57,14 +61,19 @@
       </div>
       <hr><br>
       <div class="container">
-        <div class="input-field col s12">
+        <div class="input-field col s12 m6">
           <select>
-            <option value="" disabled selected><i class="material-icons">sort</i>Choose your option</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
+            <optgroup label="All Collections">
+              <option value="1">Most Recent</option>
+              <option value="2">Most Favored</option>
+              <option value="3">Alphabetical</option>
+            </optgroup>
+            <optgroup label="My Collections">
+              <option value="4">All My Collections</option>
+              <option value="4">My Favorites</option>
+            </optgroup>
           </select>
-          <label>Materialize Select</label>
+          <label>Sort Collections By:</label>
         </div>
 
          <ul class="collection">

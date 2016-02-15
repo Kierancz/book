@@ -30,11 +30,12 @@
         <li class="no-padding">
           <ul class="collapsible collapsible-accordion">
             <li>
-              <a class="collapsible-header"><i class="material-icons">person</i> Account<i class="mdi-navigation-arrow-drop-down right"></i></a>
+              <a class="collapsible-header"><i class="material-icons">account_circle</i> Account<i class="mdi-navigation-arrow-drop-down right"></i></a>
               <div class="collapsible-body">
                 <ul>
                   <li><a href="profile.html"><i class="material-icons">face</i> Profile</a></li>
                   <li><a href="accountSettings.html"><i class="material-icons">settings</i> Settings</a></li>
+                  <li><a href="profile.html"><i class="material-icons">people</i> Admin</a></li>
                   <li><a href="logout.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
                 </ul>
               </div>
@@ -53,53 +54,55 @@
       </script>
 
       <div class="container">
-        <h1>Create a New Collection</h1>
+        <h1>New Collection</h1>
       </div>
       <hr><br>
       <div class="container">
         <div class="row">
           <form class="col s12">
-          <div class="col m6 s12">
             <div class="row">
               <div class="input-field">
+                <i class="material-icons prefix">title</i>
                 <input id="input_text" type="text" length="40">
-                <label for="input_text">Title</label>
+                <label for="input_text"> Title</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
+                <i class="material-icons prefix">description</i>
                 <input id="input_text2" type="text" length="
                 100">
-                <label for="input-text2">Description</label>
+                <label for="input-text2"> Description</label>
               </div>
             </div>
-          </div>
-          <div class="col m6 s12">
             <div class="row">
               <div class="input-field">
+                <i class="material-icons prefix">person_add</i>
                 <input id="input_text3" type="text" length="
                 100">
-                <label for="input-text3">Collaborators (email/usernames separate by commas)</label>
+                <label for="input-text3"> Collaborators (email/usernames separate by commas)</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field">
-              <input type="checkbox" class="filled-in" id="filled-in-box" checked="checked" />
-              <label for="filled-in-box">Private (only you and collaborators can view)</label>
+                <i class="material-icons prefix">security</i>
+                <input type="checkbox" class="filled-in" id="filled-in-box" />
+                <label for="filled-in-box"> Private (only you and collaborators can view)</label>
+              </div>
             </div>
+            <br>
             <div class="file-field input-field">
               <div class="btn">
-                <span>Image File</span>
+                <span> Image File</span>
                 <input type="file" multiple>
               </div>
               <div class="file-path-wrapper">
                 <input class="file-path validate" type="text" placeholder="Upload an image for this collection">
               </div>
             </div>
-          </div>
             <br><br>
             <div class="row">
-              <button class="btn waves-effect waves-light" type="submit" name="action">Create Collection
+              <button class="btn waves-effect waves-light" type="submit" name="action" href="collections.html">Create Collection
                 <i class="material-icons right">launch</i>
               </button>
             </div>
