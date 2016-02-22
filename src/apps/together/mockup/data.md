@@ -1,7 +1,11 @@
-#Data Model
+---
+layout: layout.hbs
+---
+
+# Data Model
 There will be three different objects that form that data model, Users, Klustrs, and Items. These will have the following attributes:
 
-###Users:
+### Users:
 * id
 * username
 * userimage
@@ -10,7 +14,7 @@ There will be three different objects that form that data model, Users, Klustrs,
 * favoriteKlustrs [klustrIDs]
 * favoriteItems [itemIDs]
 
-###Klustrs:
+### Klustrs:
 * id
 * name
 * description
@@ -20,7 +24,7 @@ There will be three different objects that form that data model, Users, Klustrs,
 * collaborators [userIDs]
 * comments [userIDs]
 
-###Items:
+### Items:
 * id
 * mediaURL
 * media
@@ -31,7 +35,7 @@ There will be three different objects that form that data model, Users, Klustrs,
 
 ---
 
-#Revisions
+# Revisions
 I had to change the klustr view page from a single column list of items to a carousel slider format.
 
 #### Concurrency
