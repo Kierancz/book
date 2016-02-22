@@ -7,31 +7,31 @@ There will be three different objects that form that data model, Users, Klustrs,
 
 ### Users:
 * id
-* username
-* userimage
-* klustrs [klustrIDs]
-* items [itemIDs]
-* favoriteKlustrs [klustrIDs]
-* favoriteItems [itemIDs]
+   * username
+   * userimage
+   * klustrs [klustrIDs]
+   * items [itemIDs]
+   * favoriteKlustrs [klustrIDs]
+   * favoriteItems [itemIDs]
 
 ### Klustrs:
 * id
-* name
-* description
-* image
-* favorites [userIDs]
-* items [itemIDs]
-* collaborators [userIDs]
-* comments [userIDs]
+   * name
+   * description
+   * image
+   * favorites [userIDs]
+   * items [itemIDs]
+   * collaborators [userIDs]
+   * comments [userIDs]
 
 ### Items:
 * id
-* mediaURL
-* media
-* favorites [userIDs]
-* klustr [klustrID]
-* user [userID]
-* comments [userIDs]
+   * mediaURL
+   * media
+   * favorites [userIDs]
+   * klustr [klustrID]
+   * user [userID]
+   * comments [userIDs]
 
 ---
 
