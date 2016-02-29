@@ -1,22 +1,30 @@
 class User extends React.Component {
-
   render(){
-
-    if (this.props.user){
-      // user is authenticated
-      return <div>
-          <h2>Hello {this.props.user.displayName}!</h2>
-          <pre>{JSON.stringify(this.props.user)}</pre>
-          <a href="#" onClick={this.props.logoutAction}>Logout</a>
-      </div>
-    } else {
-      // user is not set
-      return <div>
-        <h2>You are not logged in yet.</h2>
-        <a href="#" onClick={this.props.loginAction}>Login via Github</a>
-      </div>
+    var user = this.props.user;
+	
+    if( !user){
+      return(<div></div>);
     }
+    return( 
+	  
+    <div className="col s12 m6">
+      <div className="card">
+        <div className="card-content">
+          <span className="card-title activator grey-text text-darken-4">
+            <img className="activator" height="50" src={user.imgURL}></img>{'  ' + user.username}<i className="material-icons right">more_vert</i>
+          </span>
+          <div className="collection">
+		    <li><a className="collection-item"><b>Status:  </b>{user.status}</a></li>
+		    <li><a className="collection-item"><b>Latitude: {user.pos[0]}</b></a></li>
+             <li><a className="collection-item"><b>Longitude: {user.pos[1]}</b></a></li>
+             
+          </div>
+        </div>
+	    </div>
+	  </div>
+	  
+	)
   }
-
 }
+
 MyComponents.User = User

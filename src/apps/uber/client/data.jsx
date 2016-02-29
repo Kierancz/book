@@ -5,6 +5,11 @@ var data = {
   user: null
 }
 
+var members = [{name: 'Nicolas Broeking', github: 'https://github.com/nbroeking', image: 'https://avatars.githubusercontent.com/u/3384954?v=3'},
+        {name: 'BenedictRM', github: 'https://github.com/BenedictRM', image: 'https://avatars.githubusercontent.com/u/6699366?v=3'},
+        {name: 'Kierancz', github: 'https://github.com/search?utf8=✓&q=user%3AKierancz', image: 'https://avatars.githubusercontent.com/u/6394642?v=3'},
+        {name: 'yava9221', github: 'https://github.com/yava9221', image: 'https://avatars.githubusercontent.com/u/14116764?v=3'}];
+
 // a single 'handlers' object that holds all the actions of your entire app
 var actions = {}
 
@@ -12,11 +17,16 @@ var actions = {}
 // needs to to re-rendered
 // 'data' and 'actions' are injected into the app
 function render(){
+  ReactDOM.render(<MyComponents.NavBar data={data} actions={actions}/>,
+    $('#nav-bar-container').get(0))
+  
   ReactDOM.render(
     <MyComponents.App
         data={data}
+        members={members}
         actions={actions}/>,
     $('#app-container').get(0)
+
   )
 }
 
@@ -24,7 +34,7 @@ function render(){
 // DATA
 //
 
-var firebaseRef = new Firebase('https://ucdd2-book.firebaseio.com/uber')
+var firebaseRef = new Firebase('https://team-revolver.firebaseio.com')
 
 // Real-time Data (load constantly on changes)
 firebaseRef.child('providers')
@@ -68,17 +78,19 @@ actions.login = function(){
         username: authData.github.username,
         id: authData.github.id,
         status: 'online',
-        pos: data.center  // position, default to the map center
+        pos: data.center,  // position, default to the map center
+        imgURL: authData.github.profileImageURL
       }
-
+      
       var userRef = firebaseRef.child('users').child(user.username)
 
       // subscribe to the user data
       userRef.on('value', function(snapshot){
+        console.log("user Changed");
         data.user = snapshot.val()
         render()
       })
-
+      
       // set the user data
       userRef.set(user)
 
@@ -89,8 +101,9 @@ actions.login = function(){
 
 actions.logout = function(){
 
-  if (data.user){
 
+  if (data.user){
+    console.log("Logout");
     firebaseRef.unauth()
 
     var userRef = firebaseRef
@@ -110,3 +123,5 @@ actions.logout = function(){
   }
 
 }
+
+render();
