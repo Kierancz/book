@@ -26,36 +26,22 @@
         });
       </script>
 
-      <ul id="slide-out" class="side-nav fixed">
-        <li class="logo">
-          <a href="index.html" class="brand-logo"><h3>Klustr</h3></a>
-        </li>
-        <form>
-          <div class="input-field">
-            <input id="search" type="search" required>
-            <label for="search"><i class="material-icons">search</i></label>
-            <i class="material-icons">close</i>
-          </div>
-        </form>
-        <li class="no-padding">
-          <ul class="collapsible collapsible-accordion">
-            <li>
-              <a class="collapsible-header"><i class="material-icons">account_circle</i> Account<i class="mdi-navigation-arrow-drop-down right"></i></a>
-              <div class="collapsible-body">
-                <ul>
-                  <li><a href="profile.html"><i class="material-icons">face</i> Profile</a></li>
-                  <li><a href="accountSettings.html"><i class="material-icons">settings</i> Settings</a></li>
-                  <li><a href="profile.html"><i class="material-icons">people</i> Admin</a></li>
-                  <li><a href="logout.html"><i class="material-icons">exit_to_app</i> Logout</a></li>
-                </ul>
-              </div>
-            </li>
+      <nav>
+      <div class="nav-wrapper black">
+        <div class="container">
+          <a href="/apps/together/mockup-team/index.html" class="brand-logo">Chatty Kathy</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/apps/together/mockup-team/chatrooms.html"><i class="material-icons left">chat</i> Chatrooms</a></li>
+            <li><a href="/apps/together/mockup-team/chatrooms.html" onClick={this.props.actions.login}> Login</a></li>
           </ul>
-        </li>
-        <li class="bold"><a href="collections.html"><i class="material-icons">view_module</i> Collections</a></li>
-        <li class="bold"><a href="newCollection.html"><i class="material-icons">library_add</i> New Collection</a></li>
-        <li class="bold"><a href="about.html"><i class="material-icons">info</i> About</a></li>
-      </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="/apps/together/mockup-team/chatrooms.html"><i class="material-icons left">chat</i> Chatrooms</a></li>
+            <li><a href="/apps/together/mockup-team/chatrooms.html" onClick={this.props.actions.login}> Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
 
         <div class="fixed-action-btn" style="top: 45px; right: 24px;">
           <a class="btn-floating btn-large blue">
