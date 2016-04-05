@@ -22,6 +22,10 @@ class TextBubble extends React.Component {
           <iframe width="853" height="480" src={attachmentEmbed} frameBorder="0" allowFullScreen></iframe>
         </div>;
       }
+      else if(attachmentStr.includes('jpg') || attachmentStr.includes('jpeg') || attachmentStr.includes('png') || attachmentStr.includes('gif') || attachmentStr.includes('gifv')){
+        console.log('photo detected: ' + attachmentStr);
+        attachment = <img className="responsive-img" src={attachmentStr}></img>;
+      }
     }
     else {
       attachment = <div/>;

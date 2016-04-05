@@ -51,6 +51,11 @@ body {
     position: relative;
     min-width: 300px;
 }
+.responsive-img
+{
+    display: block;
+    width: 300px;
+}
 .brand-logo
 {
     position: relative;
