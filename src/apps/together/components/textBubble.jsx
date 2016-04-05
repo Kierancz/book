@@ -16,7 +16,7 @@ class TextBubble extends React.Component {
           </div>;
       }
       else if(attachmentStr.includes('vimeo')){
-        attachmentEmbed = attachmentStr.replace('https://vimeo.com/', 'http://player.vimeo.com/video/');
+        attachmentEmbed = attachmentStr.replace('https://vimeo.com/', 'https://player.vimeo.com/video/');
         attachment = 
         <div className="video-container">
           <iframe width="853" height="480" src={attachmentEmbed} frameBorder="0" allowFullScreen></iframe>

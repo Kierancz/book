@@ -1,7 +1,8 @@
 // a single 'data' object that holds the data of your entire app, with initial values
 var State = {
   ADMIN: 0,
-  CHATS: 1
+  CHATS: 1,
+  USER: 2
 }
 
 var data = {
@@ -30,20 +31,28 @@ function render(){
   }
   else{
     if( data.State == State.CHATS){
-        ReactDOM.render(
-          <MyComponents.ChatApp
-            data={data}
-            actions={actions}/>,
-          $('#app-container').get(0)
-        )
+      ReactDOM.render(
+        <MyComponents.ChatApp
+          data={data}
+          actions={actions}/>,
+        $('#app-container').get(0)
+      )
     }
     else if(data.State == State.ADMIN){
-        ReactDOM.render(
-          <MyComponents.AdminApp
-            data={data}
-            actions={actions}/>,
-          $('#app-container').get(0)
+      ReactDOM.render(
+        <MyComponents.AdminApp
+          data={data}
+          actions={actions}/>,
+        $('#app-container').get(0)
         )
+    }
+    else if(data.State == State.USER){
+      ReactDOM.render(
+        <MyComponents.UserApp
+          data={data}
+          actions={actions}/>,
+        $('#app-container').get(0)
+      )
     }
   }
 }
@@ -282,6 +291,9 @@ actions.changepage = function(page){
   console.log("Change page to " + page)
   if( page == "admin"){
     data.State = State.ADMIN;
+  }
+  else if( page == "user"){
+    data.State = State.USER;
   }
   else{
     data.State = State.CHATS;
